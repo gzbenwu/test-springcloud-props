@@ -1,0 +1,13 @@
+#? 匹配任意单个字符  /feign-consumer/? 匹配/feign-consumer/a,/feign-consumer/b,/feign-consumer/c等
+#* 匹配任意数量的字符 /feign-consumer/* 匹配/feign-consumer/aaa,feign-consumer/bbb,/feign-consumer/ccc等，无法匹配/feign-consumer/a/b/c
+#**  匹配任意数量的字符 /feign-consumer/* 匹配/feign-consumer/aaa,feign-consumer/bbb,/feign-consumer/ccc等，也可以匹配/feign-consumer/a/b/c
+
+zuul:
+  routes:
+    root:
+      path: /**
+      url: http://www.baidu.com
+    microservice-front1:
+      path: /microservice-front1/**
+      serviceId: /microservice-front1
+      
