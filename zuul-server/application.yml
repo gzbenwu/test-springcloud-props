@@ -1,24 +1,14 @@
 #? 匹配任意单个字符  /feign-consumer/? 匹配/feign-consumer/a,/feign-consumer/b,/feign-consumer/c等
 #* 匹配任意数量的字符 /feign-consumer/* 匹配/feign-consumer/aaa,feign-consumer/bbb,/feign-consumer/ccc等，无法匹配/feign-consumer/a/b/c
 #**  匹配任意数量的字符 /feign-consumer/* 匹配/feign-consumer/aaa,feign-consumer/bbb,/feign-consumer/ccc等，也可以匹配/feign-consumer/a/b/c
-
 zuul:
   routes:
     root:
       path: /**
-      url: http://www.baidu.com
-    P404:
-      path: /404
-      url: /404.html
-    health:
-      path: /health
-      url: /health
+      url: http://news.163.com/
+      #http://news.163.com/18/0627/09/DLA25I3N000189FH.html
     microservice-front1:
       path: /front1/**
       serviceId: microservice-front1
-  ignored-services:
-  - register-server
-  - zuul-testclient
-  - zuul-server
-  - config-server
-  - microservice-end1
+  ignored-services: register-server,zuul-testclient,zuul-server,config-server,microservice-end1,microservice-front1
+  ignored-patterns: /**/front1/**/info,/health,/info,/serverLink,/404.html
