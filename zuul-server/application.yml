@@ -7,7 +7,18 @@ zuul:
     root:
       path: /**
       url: http://www.baidu.com
+    P404:
+      path: /404
+      url: /404.html
+    health:
+      path: /health
+      url: /health
     microservice-front1:
-      path: /microservice-front1/**
+      path: /front1/**
       serviceId: microservice-front1
-      
+  ignored-services:
+    - register-server
+    - zuul-testclient
+    - zuul-server
+    - config-server
+    - microservice-end1
