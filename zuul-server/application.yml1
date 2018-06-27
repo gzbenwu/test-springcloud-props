@@ -17,8 +17,8 @@ zuul:
       path: /front1/**
       serviceId: microservice-front1
   ignored-services:
-    - register-server
-    - zuul-testclient
-    - zuul-server
-    - config-server
-    - microservice-end1
+  - register-server
+  - zuul-testclient
+  - zuul-server
+  - config-server
+  - microservice-end1
