@@ -9,5 +9,5 @@ zuul:
       url: http://www.baidu.com
     microservice-front1:
       path: /microservice-front1/**
-      serviceId: /microservice-front1
+      serviceId: microservice-front1
       
