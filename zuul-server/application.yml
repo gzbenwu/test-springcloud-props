@@ -4,11 +4,15 @@
 zuul:
   routes:
     root:
+      #转发根目录及以下所有的请求。对于ZuulServer本身提供的服务也会被转发，如/health
       path: /**
       url: http://news.163.com/
       #http://news.163.com/18/0627/09/DLA25I3N000189FH.html
     microservice-front1:
+      #转发根目录前提下，单独说明/front1目录规则。定义顺序有要求。
       path: /front1/**
       serviceId: microservice-front1
+  #默认自动转发所有在eureka中的所有MS服务，要在这里做限制
   ignored-services: register-server,zuul-testclient,zuul-server,config-server,microservice-end1,microservice-front1
+  #针对特定请求做排除，包括ZuulServer本身提供的服务(由于代理了/，所以这里指定特殊的如/health)
   ignored-patterns: /**/front1/**/info,/health,/info,/serverLink,/404.html
