@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: kafka.producer
+  kafka:
+    producer:
+      acks: all
+      retries: 3
+  cloud:
+    stream:
+      kafka:
+        binder:
+          replicationFactor: 2
+          autoAddPartitions: true
+          brokers:
+          - 127.0.0.1:9091
+          - 127.0.0.1:9092
+          - 127.0.0.1:9093
+          - 127.0.0.1:9094
+          - 127.0.0.1:9095
+          zk-nodes:
+          - 127.0.0.1:2181
+          - 127.0.0.1:2182
+          - 127.0.0.1:2183
+          - 127.0.0.1:2184
+          - 127.0.0.1:2185
+        bindings:
+          INPUT:
+            consumer:
+              startOffset: latest
+              enableDlq: true
+              dlqName: test.data.timeout.error
+              autoCommitOnError: true
+      default:
+        group: ${spring.application.name}
+        consumer:
+          maxAttempts: 1
+      bindings:
+        INPUT:
+          destination: test.data.timeout
+          group: ${spring.application.name}
+          content-type: application/x-java-serialized-object;type=kafka.producer.Message
+          consumer:
+            concurrency: 1
+            partitioned: true
+        OUTPUT:
+          destination: test.data.timeout
+          content-type: application/x-java-serialized-object;type=kafka.producer.Message
+          producer:
+            partitionKeyExpression: payload.key
+            partition-count: 9
